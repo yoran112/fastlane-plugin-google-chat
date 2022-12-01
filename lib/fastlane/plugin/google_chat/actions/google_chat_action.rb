@@ -14,7 +14,7 @@
             {
               header: {
                 title: params[:title],
-                imageUrl: params[:imageUrl]
+                imageUrl: params[:avatarUrl]
               },
               sections: [
                 {
@@ -30,6 +30,21 @@
                         content: params[:section1Description]
                       }
                     }
+                  ]
+                },
+                {
+                  widgets: [
+                     {
+                       image: {
+                         imageUrl: params[:imageUrl],
+                         onClick: {
+                           openLink:{
+                              url: params[:imageLink]
+                           }
+                         },
+                         altText: params[:altText]
+                       }
+                     }
                   ]
                 },
                 {
@@ -86,8 +101,8 @@
         
         def self.available_options
           [
-            FastlaneCore::ConfigItem.new(key: :imageUrl,
-                                    env_name: "GOOGLE_CHAT_imageUrl",
+            FastlaneCore::ConfigItem.new(key: :avatarUrl,
+                                    env_name: "GOOGLE_CHAT_avatarUrl",
                                 description: "A description of your option",
                                     optional: false,
                                         type: String),
@@ -125,7 +140,22 @@
                                                 env_name: "GOOGLE_CHAT_buttonUrl",
                                             description: "A description of your option",
                                                 optional: false,
-                                                    type: String)                                         
+                                                    type: String),  
+            FastlaneCore::ConfigItem.new(key: :imageUrl,
+                                                env_name: "GOOGLE_CHAT_imageUrl",
+                                            description: "A description of your option",
+                                                optional: false,
+                                                    type: String),
+            FastlaneCore::ConfigItem.new(key: :imageLink,
+                                                env_name: "GOOGLE_CHAT_imageLink",
+                                            description: "A description of your option",
+                                                optional: false,
+                                                    type: String),
+            FastlaneCore::ConfigItem.new(key: :altText,
+                                                env_name: "GOOGLE_CHAT_altText",
+                                            description: "A description of your option",
+                                                optional: false,
+                                                    type: String),            
           ]
         end
         
